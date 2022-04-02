@@ -8,7 +8,12 @@ module API
           desc 'Return all campaigns'
           get do
             campaigns = Campaign.all
-            present campaigns, with: API::Business::V1::Entities::Campaign
+            campaigns = API::Business::V1::Entities::Campaign.represent(campaigns)
+
+            success_response_with_json('All campaigns fetched successfully', campaigns)
+          rescue => error
+            status :unprocessable_entity
+            failure_response_with_json("Unable to return campaigns due to #{error.message}")
           end
 
           desc 'Return a campaign'
@@ -17,7 +22,12 @@ module API
           end
           get ':id' do
             campaign = Campaign.where(id: params[:id]).first
-            present campaign, with: API::Business::V1::Entities::Campaign
+            campaign = API::Business::V1::Entities::Campaign.represent(campaign)
+
+            success_response_with_json('Campaign details fetched successfully', campaign)
+          rescue => error
+            status :unprocessable_entity
+            failure_response_with_json("Unable to return campaign details due to #{error.message}")
           end
         end
       end

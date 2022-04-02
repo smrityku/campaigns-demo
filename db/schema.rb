@@ -45,9 +45,9 @@ ActiveRecord::Schema.define(version: 2022_04_02_043857) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name"
-    t.decimal "target_amount"
-    t.decimal "investment_multiple"
-    t.decimal "raised_amount"
+    t.decimal "target_amount", default: "0.0"
+    t.decimal "investment_multiple", default: "0.0"
+    t.decimal "raised_amount", default: "0.0"
     t.string "sector"
     t.string "country"
     t.datetime "created_at", precision: 6, null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2022_04_02_043857) do
     t.string "user_name"
     t.string "email"
     t.string "address"
-    t.decimal "amount_invested"
+    t.decimal "amount_invested", default: "0.0"
     t.bigint "campaign_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

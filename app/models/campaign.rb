@@ -17,8 +17,8 @@ class Campaign < ApplicationRecord
   end
 
   def investment_multiple_constrains
-    if investemnt_multiple > 0 && (target_amount % investemnt_multiple) == 0
-      errors.add(:investemnt_multiple, 'Please put some value which is a multiple of target amount')
+    if investment_multiple > 0 && (target_amount % investment_multiple) != 0
+      errors.add(:investment_multiple, 'Please put some value which is a multiple of target amount')
     end
   end
 end
